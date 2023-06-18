@@ -2,6 +2,7 @@ import sys
 
 import pygame
 
+from level import Level
 from settings import *
 
 GAME_TITLE = 'Py-Dew Valley'
@@ -13,12 +14,14 @@ class Game:
         self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
         pygame.display.set_caption(GAME_TITLE)
         self.clock = pygame.time.Clock()
+        self.level = Level()
 
     def run(self):
         while True:
             for event in pygame.event.get():
                 self.do_quit(event)
             dt = self.clock.tick() / 1000
+            self.level.run(dt)
             pygame.display.update()
 
     def do_quit(self, event):
